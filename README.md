@@ -1,4 +1,4 @@
-# Toyota 32Bit Internship Portal
+# HireFlow — Applicant Tracking System
 
 A full-stack applicant tracking system built as a senior capstone project. Manages the entire internship recruitment pipeline — from job postings and applications to task assignments and candidate evaluation.
 
@@ -66,8 +66,8 @@ A full-stack applicant tracking system built as a senior capstone project. Manag
 ### Quick Start
 
 ```bash
-git clone https://github.com/Ali-Kerem-Kol/Toyota-32Bit-Basvuru-Portali.git
-cd Toyota-32Bit-Basvuru-Portali
+git clone https://github.com/Ali-Kerem-Kol/HireFlow.git
+cd HireFlow
 cp .env.example .env
 docker compose up -d --build
 ```
