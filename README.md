@@ -1,108 +1,93 @@
-# ATS - Applicant Tracking System
+# Toyota 32Bit Internship Portal
 
-Üniversite bitirme projesi olarak geliştirilen, stajyer başvuru süreçlerini yöneten full-stack web uygulaması.
+A full-stack applicant tracking system built as a senior capstone project. Manages the entire internship recruitment pipeline — from job postings and applications to task assignments and candidate evaluation.
 
-## Özellikler
+## Features
 
-**Aday (User) Tarafı:**
-- Kayıt, e-posta doğrulama, şifre sıfırlama
-- Profil ve CV yönetimi
-- Açık pozisyonlara başvuru
-- Görev takibi ve dosya yükleme
-- Müsaitlik takvimi
+**Candidate Portal:**
+- Registration with email verification and password reset
+- Profile and CV management
+- Browse and apply to open positions
+- Track assigned tasks with file uploads
+- Availability calendar
 
-**Admin Tarafı:**
-- İlan oluşturma ve yönetimi
-- Başvuru değerlendirme ve durum takibi
-- Görev atama, timeline ve proje takibi
-- Toplu e-posta gönderimi
-- CSV export, admin notları
-- Soru havuzu yönetimi
+**Admin Dashboard:**
+- Create and manage job postings
+- Review applications and update statuses
+- Assign tasks, track progress with timeline view
+- Bulk email campaigns
+- CSV export, admin notes, question pool management
 
-## Teknolojiler
+## Tech Stack
 
-| Katman | Teknoloji |
-|--------|-----------|
+| Layer | Technology |
+|-------|-----------|
 | Backend | Java 17, Spring Boot 3.3, Spring Security, JWT |
 | Frontend | React 19, TypeScript, Vite, Tailwind CSS |
-| Veritabanı | PostgreSQL 16, Flyway (migration) |
-| Containerization | Docker, Docker Compose |
-| E-posta | Spring Mail + Mailpit (dev) |
+| Database | PostgreSQL 16, Flyway migrations |
+| Infrastructure | Docker, Docker Compose, Nginx |
+| Email | Spring Mail + Mailpit (dev) |
 
-## Proje Yapısı
+## Project Structure
 
 ```
-├── backend/                # Spring Boot API
-│   ├── src/main/java/      # Java kaynak kodları
+├── backend/                  # Spring Boot REST API
+│   ├── src/main/java/
 │   │   └── com/project/project/
-│   │       ├── config/     # Konfigürasyon ve exception handler
-│   │       ├── controller/ # REST controller'lar
-│   │       ├── dto/        # Request/Response DTO'lar
-│   │       ├── entity/     # JPA entity'ler
-│   │       ├── repository/ # Spring Data JPA repository'ler
-│   │       ├── security/   # JWT, authentication
-│   │       └── service/    # İş mantığı
-│   ├── src/main/resources/
-│   │   └── db/migration/   # Flyway SQL migration'ları
-│   └── Dockerfile
-├── frontend/               # React SPA
-│   ├── src/
-│   │   ├── api/            # Axios API client
-│   │   ├── auth/           # Auth context ve hooks
-│   │   ├── components/     # UI bileşenleri
-│   │   ├── pages/          # Sayfa bileşenleri
-│   │   ├── hooks/          # Custom hooks
-│   │   ├── lib/            # Utility fonksiyonları
-│   │   └── theme/          # Tema yönetimi
-│   └── Dockerfile
-├── scripts/                # Yardımcı scriptler
-├── docker-compose.yml      # Tüm servisleri ayağa kaldırır
-└── .env.example            # Ortam değişkenleri şablonu
+│   │       ├── config/       # App config & exception handlers
+│   │       ├── controller/   # REST controllers
+│   │       ├── dto/          # Request/Response DTOs
+│   │       ├── entity/       # JPA entities
+│   │       ├── repository/   # Spring Data repositories
+│   │       ├── security/     # JWT auth & filters
+│   │       └── service/      # Business logic
+│   └── src/main/resources/
+│       └── db/migration/     # Flyway SQL migrations
+├── frontend/                 # React SPA
+│   └── src/
+│       ├── api/              # Axios API client
+│       ├── auth/             # Auth context & hooks
+│       ├── components/       # Reusable UI components
+│       ├── pages/            # Page components
+│       ├── hooks/            # Custom React hooks
+│       └── lib/              # Utility functions
+├── scripts/                  # Helper scripts
+├── docker-compose.yml
+└── .env.example
 ```
 
-## Kurulum
+## Getting Started
 
-### Gereksinimler
+### Prerequisites
 
-- [Docker](https://docs.docker.com/get-docker/) ve Docker Compose
+- [Docker](https://docs.docker.com/get-docker/) & Docker Compose
 - Git
 
-### Hızlı Başlangıç
+### Quick Start
 
-1. **Projeyi klonlayın:**
-   ```bash
-   git clone https://github.com/<kullanici-adi>/ats.git
-   cd ats
-   ```
+```bash
+git clone https://github.com/Ali-Kerem-Kol/Toyota-32Bit-Basvuru-Portali.git
+cd Toyota-32Bit-Basvuru-Portali
+cp .env.example .env
+docker compose up -d --build
+```
 
-2. **Ortam değişkenlerini hazırlayın:**
-   ```bash
-   cp .env.example .env
-   ```
+| Service | URL |
+|---------|-----|
+| Frontend | http://localhost:3000 |
+| Backend API | http://localhost:8080/api/v1 |
+| Mailpit (SMTP UI) | http://localhost:8025 |
 
-3. **Konteynerleri başlatın:**
-   ```bash
-   docker compose up -d --build
-   ```
+### Default Admin Account
 
-4. **Uygulamaya erişin:**
+An admin account is automatically seeded on first startup:
 
-   | Servis | Adres |
-   |--------|-------|
-   | Frontend | http://localhost:3000 |
-   | Backend API | http://localhost:8080/api/v1 |
-   | Mailpit (SMTP UI) | http://localhost:8025 |
+- **Email:** `admin@32bit.com.tr`
+- **Password:** `Admin12345!`
 
-### Varsayılan Admin Hesabı
+Configurable via `.env` file.
 
-Uygulama ilk başlatıldığında veritabanında admin yoksa otomatik olarak oluşturulur:
-
-- **E-posta:** `admin@32bit.com.tr`
-- **Şifre:** `Admin12345!`
-
-Bu bilgiler `.env` dosyasından değiştirilebilir.
-
-### Lokal Geliştirme (Docker olmadan)
+### Local Development (without Docker)
 
 **Backend:**
 ```bash
@@ -117,16 +102,16 @@ npm install
 npm run dev
 ```
 
-> Not: Lokal geliştirme için PostgreSQL ve Mailpit ayrıca çalışıyor olmalıdır.
+> Requires a running PostgreSQL instance and Mailpit for email.
 
-## Veritabanı Sıfırlama
+## Database Reset
 
 ```bash
 docker compose down -v
 docker compose up -d --build
 ```
 
-Veya yardımcı script ile:
+Or use the helper scripts:
 
 ```bash
 # Linux / macOS
@@ -136,14 +121,14 @@ bash ./scripts/reset-db.sh
 .\scripts\reset-db.ps1
 ```
 
-## API Mimarisi
+## API Overview
 
-- RESTful API, `/api/v1` prefix'i altında
-- JWT tabanlı kimlik doğrulama (Bearer token)
+- RESTful API under `/api/v1`
+- JWT Bearer token authentication
 - Role-based access control: `USER`, `ADMIN`
-- Flyway ile otomatik veritabanı migration
-- Dosya yükleme (CV, görev ekleri) - max 50MB
+- Automatic database migrations via Flyway
+- File uploads (CV, task attachments) — max 50MB
 
-## Lisans
+## License
 
-Bu proje bir üniversite bitirme projesidir.
+This project is licensed under the [MIT License](LICENSE).
